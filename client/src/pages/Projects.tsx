@@ -55,12 +55,12 @@ const Projects = () => {
           </div>
           <div className='sm:hidden flex-1 flex justify-end'>
             {isMenuOpen ? (
-              <XIcon
+              <MessageSquareIcon
                 className='size-6 cursor-pointer'
                 onClick={() => setIsMenuOpen(false)}
               />
             ) : (
-              <MessageSquareIcon
+              <XIcon
                 className='size-6 cursor-pointer'
                 onClick={() => setIsMenuOpen(true)}
               />
@@ -76,7 +76,7 @@ const Projects = () => {
     </div>
   ) : (
     <div className='flex items-center justify-center h-screen'>
-      <p className='text-2xl font-medium text-gray-200'>not available</p>
+      <p className='text-2xl font-medium text-gray-200'>Unable to load projects!</p>
     </div>
   );
 }
