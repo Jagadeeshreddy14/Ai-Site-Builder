@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { Project } from '../types';
 import { ArrowBigDownDashIcon, EyeIcon, EyeOffIcon, FullscreenIcon, LaptopIcon, Loader2Icon, MessageSquareIcon, MonitorIcon, SaveIcon, SmartphoneIcon, TabletIcon, XIcon } from 'lucide-react';
 import { dummyConversations, dummyProjects, dummyVersion } from '../assets/assets';
 import { Sidebar } from '../components/Sidebar';
+import ProjectPreview, { type projectPreviewRef } from '../components/ProjectPreview';
 
 const Projects = () => {
   const { projectId } = useParams();
@@ -12,9 +13,10 @@ const Projects = () => {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(true);
-  const [device, setDevice] = useState<'desktop' | 'mobile' | 'tablet'>("desktop");
+  const [device, setDevice] = useState<'Desktop' | 'Phone' | 'Tablet'>("Desktop");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const previewRef = useRef<projectPreviewRef>(null);
 
   const fetchProject = async () => {
     const project = dummyProjects.find(project => project.id === projectId);
@@ -61,7 +63,7 @@ const Projects = () => {
         <div className='flex items-center gap-2 sm:min-w-90 text-nowrap'>
           <img src="/favicon.svg" alt="logo" className='h-6 cursor-pointer' onClick={() => navigate('/')} />
           <div className='max-w-64 sm: max-w-xs'>
-            <p className='text-sm text-meduim capitalize truncate'>{project.name}</p>
+            <p className='text-sm text-medium capitalize truncate'>{project.name}</p>
             <p className='text-xs text-gray-400 -mt-0.5'>Previewing last saved version</p>
           </div>
           <div className='sm:hidden flex-1 flex justify-end'>
@@ -81,16 +83,16 @@ const Projects = () => {
         {/*middle */}
         <div className='hidden sm:flex gap-2  bg-gray-950 p-1.5 rounded-md'>
           <SmartphoneIcon
-            onClick={() => setDevice('mobile')}
-            className={`size-6 p-1 rounded cursor-pointer transition-colors ${device === 'mobile' ? 'bg-gray-800 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+            onClick={() => setDevice('Phone')}
+            className={`size-6 p-1 rounded cursor-pointer transition-colors ${device === 'Phone' ? 'bg-gray-800 text-white' : 'text-gray-500 hover:text-gray-300'}`}
           />
           <TabletIcon
-            onClick={() => setDevice('tablet')}
-            className={`size-6 p-1 rounded cursor-pointer transition-colors ${device === 'tablet' ? 'bg-gray-800 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+            onClick={() => setDevice('Tablet')}
+            className={`size-6 p-1 rounded cursor-pointer transition-colors ${device === 'Tablet' ? 'bg-gray-800 text-white' : 'text-gray-500 hover:text-gray-300'}`}
           />
           <LaptopIcon
-            onClick={() => setDevice('desktop')}
-            className={`size-6 p-1 rounded cursor-pointer transition-colors ${device === 'desktop' ? 'bg-gray-800 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+            onClick={() => setDevice('Desktop')}
+            className={`size-6 p-1 rounded cursor-pointer transition-colors ${device === 'Desktop' ? 'bg-gray-800 text-white' : 'text-gray-500 hover:text-gray-300'}`}
           />
         </div>
         {/*right */}
@@ -105,7 +107,7 @@ const Projects = () => {
             <FullscreenIcon size={16} />
             Preview
           </Link>
-          <button  onClick={downloadCode}className='bg-gradient-to-br from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors'>
+          <button onClick={downloadCode} className='bg-gradient-to-br from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors'>
             <ArrowBigDownDashIcon size={16} /> Download
           </button>
           <button onClick={togglePublish} className='bg-gradient-to-br from-indigo-700 to-indigo-600 hover:from-indigo-600 hover:to-indigo-500 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors'>
@@ -117,8 +119,9 @@ const Projects = () => {
       </div>
       <div className='flex-1 flex overflow-auto'> 
         <Sidebar isMenuOpen={isMenuOpen} project={project} setProject={(p)=>setProject(p)} isGenerating={isGenerating} setIsGenerating={setIsGenerating}/>
-        <div className='flex-1 p-2 p1-0'>
-          Project Pewview
+        <div className='flex-1 p-2 pl-0'>
+         <ProjectPreview ref={previewRef} project={project} isGenerating={isGenerating} device={device} showEditorPanel={true} />
+        
           </div>
          
       </div>

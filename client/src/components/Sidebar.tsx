@@ -34,7 +34,7 @@ export const Sidebar = ({isMenuOpen, project,setProject,isGenerating,setIsGenera
     }, [project.conversation.length, isGenerating])
   return (
 
-    <div className={`h-full w-full sm:w-96 bg-gray-900 border-r border-gray-800 transition-all ${isMenuOpen ? 'max-sm:w-0 overflow-hidden' : ''}`}>
+    <div className={`h-full w-full sm:w-[480px] bg-gray-900 border-r border-gray-800 transition-all ${isMenuOpen ? 'max-sm:w-0 overflow-hidden' : ''}`}>
         <div className='flex flex-col h-full'>
             {/* message container*/}
             <div className='flex-1 overflow-y-auto no-scrollbar px-3 flex flex-col gap-4'>
@@ -116,7 +116,7 @@ export const Sidebar = ({isMenuOpen, project,setProject,isGenerating,setIsGenera
             <form onSubmit={handleRevisions} className='m-3 relative'>
                 <div className='flex items-center gap-2'>
                     <textarea onChange={(e)=>setInput(e.target.value)} value={input} rows={4} placeholder='Describe your website or request changes...' className='flex-1 p-3 rounded-xl resize-none text-sm outline-none ring ring-gray-700 focus:ring-indigo-500 bg-gray-800 text-gray-100 placeholder-gray-400 transition-all' disabled={isGenerating}/>
-                        <button disabled={isGenerating || !input.trim()} className='absolute bottom-2.5 right-2.5 rounded-full bg-linear-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white transition-colors disabled:opacity-60'>
+                        <button disabled={isGenerating || !input.trim()} className='absolute bottom-2.5 right-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white transition-colors disabled:opacity-60'>
                             {isGenerating ? <Loader2Icon className='size-7 p-1.5 animate-spin text-white'/>
                             :<SendIcon className='size-7 p-1.5 text-white'/>
                             }
