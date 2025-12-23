@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { Project } from '../types';
 import { ArrowBigDownDashIcon, EyeIcon, EyeOffIcon, FullscreenIcon, LaptopIcon, Loader2Icon, MessageSquareIcon, MonitorIcon, SaveIcon, SmartphoneIcon, TabletIcon, XIcon } from 'lucide-react';
-import { dummyConversations, dummyProjects } from '../assets/assets';
+import { dummyConversations, dummyProjects, dummyVersion } from '../assets/assets';
 import { Sidebar } from '../components/Sidebar';
 
 const Projects = () => {
@@ -22,7 +22,7 @@ const Projects = () => {
     setTimeout(() => {
       setLoading(false)
       if (project) {
-        setProject({ ...project, conversation: dummyConversations });
+        setProject({ ...project, conversation: dummyConversations ,versions:dummyVersion});
         setLoading(false)
         setIsGenerating(project.current_code ? false : true);
       }
