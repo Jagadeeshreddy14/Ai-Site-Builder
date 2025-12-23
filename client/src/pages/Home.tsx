@@ -43,7 +43,7 @@ const Home = () => {
               Craeting <Loader2Icon className='animate-spin size-4 text-white'/>
               </>
             )}
-            Create with AI
+            { /*Create with AI*/}
           </button>
         </form>
 

@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { Project } from '../types';
 import { ArrowBigDownDashIcon, EyeIcon, EyeOffIcon, FullscreenIcon, LaptopIcon, Loader2Icon, MessageSquareIcon, MonitorIcon, SaveIcon, SmartphoneIcon, TabletIcon, XIcon } from 'lucide-react';
 import { dummyConversations, dummyProjects } from '../assets/assets';
+import { Sidebar } from '../components/Sidebar';
 
 const Projects = () => {
   const { projectId } = useParams();
@@ -29,6 +30,16 @@ const Projects = () => {
 
     }, 2000);
   };
+  const saveProject = async()=>{
+    
+  }
+  const downloadCode = ()=>{
+
+  }
+
+  const togglePublish = async()=>{
+
+  }
 
   useEffect(() => {
     fetchProject();
@@ -84,7 +95,7 @@ const Projects = () => {
         </div>
         {/*right */}
         <div className='flex items-center justify-end  gap-3 flex-1 text-xs'>
-          <button disabled={isSaving} className='max-sm:hidden bg-gray-800 hover:bg-gray-700 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors border border-gray-700'
+          <button onClick={saveProject} disabled={isSaving} className='max-sm:hidden bg-gray-800 hover:bg-gray-700 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors border border-gray-700'
 
           >
             {isSaving ? <Loader2Icon className=" animate-spin" size={16} /> : <SaveIcon size={16} />}
@@ -94,15 +105,22 @@ const Projects = () => {
             <FullscreenIcon size={16} />
             Preview
           </Link>
-          <button className='bg-gradient-to-br from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors'>
+          <button  onClick={downloadCode}className='bg-gradient-to-br from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors'>
             <ArrowBigDownDashIcon size={16} /> Download
           </button>
-          <button className='bg-gradient-to-br from-indigo-700 to-indigo-600 hover:from-indigo-600 hover:to-indigo-500 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors'>
+          <button onClick={togglePublish} className='bg-gradient-to-br from-indigo-700 to-indigo-600 hover:from-indigo-600 hover:to-indigo-500 text-white px-3.5 py-1 flex items-center gap-2 rounded sm:rounded-sm transition-colors'>
             {project.isPublished ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
             {project.isPublished ? "Unpublish" : "Publish"}
           </button>
 
         </div>
+      </div>
+      <div className='flex-1 flex overflow-auto'> 
+        <Sidebar isMenuOpen={isMenuOpen} project={project} setProject={(p)=>setProject(p)} isGenerating={isGenerating} setIsGenerating={setIsGenerating}/>
+        <div className='flex-1 p-2 p1-0'>
+          Project Pewview
+          </div>
+         
       </div>
 
     </div>
