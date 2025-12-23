@@ -84,17 +84,16 @@ const EditorPanel = ({selectedElement,onUpdate,onClose}: EditorPanelProps) => {
             <div className='grid grid-cols-2 gap-3'>
                 <div>
                     <label className='block text-xs font-medium text-gray-500 mb-1'>Background</label>
-                    <div>
-                        
+                    <div className='flex flex-col gap-1'>
                         <input  
                             type="color" 
-                            value={values.styles.backgroundColor === 'rgba(0,0,0,0)' ? '#ffffff' : values.styles.backgroundColor} 
+                            value={values.styles.backgroundColor === 'rgba(0,0,0,0)' || !values.styles.backgroundColor ? '#ffffff' : values.styles.backgroundColor} 
                             onChange={(e) => handleStyleChange('backgroundColor', e.target.value)} 
                             className='w-full h-6 cursor-pointer'
                         />
                         <input 
                             type="text" 
-                            value={values.styles.backgroundColor === 'rgba(0,0,0,0)' ? '#ffffff' : values.styles.backgroundColor} 
+                            value={values.styles.backgroundColor === 'rgba(0,0,0,0)' || !values.styles.backgroundColor ? '#ffffff' : values.styles.backgroundColor} 
                             onChange={(e) => handleStyleChange('backgroundColor', e.target.value)} 
                             className='w-full text-sm p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 outline-none'
                         />
@@ -109,8 +108,25 @@ const EditorPanel = ({selectedElement,onUpdate,onClose}: EditorPanelProps) => {
                         className='w-full text-sm p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 outline-none'
                     />
                 </div>
-                
+                <div>
+                    <label className='block text-xs font-medium text-gray-500 mb-1'>Text Color</label>
+                    <div className='flex flex-col gap-1'>
+                        <input  
+                            type="color" 
+                            value={values.styles.color === 'rgba(0,0,0,0)' || !values.styles.color ? '#000000' : values.styles.color} 
+                            onChange={(e) => handleStyleChange('color', e.target.value)} 
+                            className='w-full h-6 cursor-pointer'
+                        />
+                        <input 
+                            type="text" 
+                            value={values.styles.color === 'rgba(0,0,0,0)' || !values.styles.color ? '#000000' : values.styles.color} 
+                            onChange={(e) => handleStyleChange('color', e.target.value)} 
+                            className='w-full text-sm p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 outline-none'
+                        />
+                    </div>
+                </div>
             </div>
+           
         </div>
     </div>
   )
