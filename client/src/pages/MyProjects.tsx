@@ -62,7 +62,7 @@ const MyProjects = () => {
                                             </div>
                                         )}
                                     </div>
-                                    <div className='p-4 text-white bg-linear-180 from-transparent group-hover:from-indigo-950 to-transparent transition-colors'>
+                                    <div className='p-4 text-white bg-gradient-to-b from-transparent group-hover:from-indigo-950 to-transparent transition-colors'>
                                         <div className='flex items-start justify-between'>
                                             <h2 className='text-lg font-medium line-clamp-2'>{project.name}</h2>
                                             <button className='px-2.5 py-0.5 mt-1 ml-2 text-xs bg-gray-800 border border-gray-700 rounded-full'>website</button>
