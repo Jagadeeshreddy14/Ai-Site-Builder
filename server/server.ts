@@ -14,7 +14,7 @@ const corsOptions = {
     credentials: true,
 }
 app.use(cors(corsOptions))
-app.all('/api/auth/{*any}', toNodeHandler(auth));
+app.all('/api/auth/*', toNodeHandler(auth));
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');
 });
